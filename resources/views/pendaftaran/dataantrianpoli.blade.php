@@ -23,6 +23,7 @@
                 <table class="table table-bordered" id="antrianTable">
                     <thead>
                         <tr>
+                            <th>No. Antrian</th>
                             <th>No. RM</th>
                             <th>Nama Pasien</th>
                             <th>Tanggal Periksa</th>
@@ -43,18 +44,7 @@
 
             <div class="row mt-3">
                 <div class="col-md-12">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    {{ $kunjungans->links('vendor.pagination.bootstrap-5') }}
                 </div>
             </div>
         </div>
@@ -64,6 +54,7 @@
         const dataAntrian = [
             @foreach ($kunjungans as $kunjungan)
                 {
+                    nomorAntrian: '{{ $kunjungan->nomor_antrian }}',
                     noRM: '{{ $kunjungan->pasien->no_rm }}',
                     namaPasien: '{{ $kunjungan->pasien->nama }}',
                     tanggalPeriksa: '{{ $kunjungan->tanggal_kunjungan }}',
@@ -82,6 +73,7 @@
             data.forEach(item => {
                 tableHTML += `
                 <tr>
+                    <td>${item.nomorAntrian}</td>
                     <td>${item.noRM}</td>
                     <td>${item.namaPasien}</td>
                     <td>${item.tanggalPeriksa}</td>

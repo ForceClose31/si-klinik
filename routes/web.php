@@ -44,8 +44,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/updatestatusgigi/{id}', [PemeriksaanController::class, 'updateStatus'])->name('updateStatusGigi');
     });
 
-    // ADMIN DAN DOKTER UMUM
-    Route::group(['middleware' => ['role:Dokter Umum|Admin']], function () {
+    // ADMIN, KEPALA KLINIK DAN DOKTER UMUM 
+    Route::group(['middleware' => ['role:Dokter Umum|Admin|Kepala Klinik']], function () {
         Route::post('/updatestatusumum/{id}', [PendaftaranController::class, 'updateStatus'])->name('update-status');
         Route::post('/skipstatusumum/{id}', [PendaftaranController::class, 'skipStatus'])->name('skip-status');
         Route::delete('/deletekunjunganumum/{id}', [PendaftaranController::class, 'deleteKunjungan'])->name('delete-kunjungan');
@@ -67,7 +67,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/editpasien/{id}', [PendaftaranController::class, 'update'])->name('updatepasien');
         Route::delete('/deletepasien/{id}', [PendaftaranController::class, 'destroy'])->name('deletePasien');
     });
-    
+
     // APOTEKER DAN ADMIN
     Route::group(['middleware' => ['role:Apoteker|Admin']], function () {
         Route::get('/dataapotek', [ApotekerController::class, 'index'])->name('dataapotek');
